@@ -10,7 +10,7 @@ import {
   useRouteLoaderData,
 } from "@remix-run/react";
 import styles from "./tailwind.css";
-import { auth, db } from "./config.server";
+import { auth, db } from "~/config.server";
 
 export const links: LinksFunction = () => [
   ...(cssBundleHref ? [{ rel: "stylesheet", href: cssBundleHref }] : []),
@@ -19,7 +19,7 @@ export const links: LinksFunction = () => [
 
 export async function loader({ request }: LoaderArgs) {
   const userId = await auth.getUserId(request)
-  const user = await db.user.findUnique({
+  const user = userId && await db.user.findUnique({
     where: { id: userId }
   })
   return json({ user })

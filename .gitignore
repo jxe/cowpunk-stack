@@ -5,3 +5,4 @@ node_modules.nosync
 /build
 /public/build
 .env
+.DS_Store
